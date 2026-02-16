@@ -1,4 +1,4 @@
-package model;
+package com.example.backend.model;
 
 
 import jakarta.persistence.*;
@@ -28,5 +28,5 @@ public class Product {
 
     private String category;
 
-    private String thumbnail;
+    private String foto;
 }
