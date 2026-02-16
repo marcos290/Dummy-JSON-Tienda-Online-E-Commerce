@@ -24,4 +24,10 @@ public class AuthController {
         // Llamamos al servicio para que haga el mapeo y lo guarde
         return ResponseEntity.ok(authService.register(request));
     }
+    // Ruta para el inicio de sesión: POST http://localhost:8080/api/auth/login
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+        // Llamo al método de login del servicio y devuelvo el resultado
+        return ResponseEntity.ok(authService.login(request));
+    }
 }
