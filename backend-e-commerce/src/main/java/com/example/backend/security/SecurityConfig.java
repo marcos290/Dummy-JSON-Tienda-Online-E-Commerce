@@ -7,6 +7,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -15,21 +22,36 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // Desactivo CSRF porque para APIs con tokens JWT no es necesario
+                // 1. Desactivamos CSRF y activamos CORS
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(withDefaults())
 
-                // Defino la política de acceso a los recursos
+                // 2. IMPORTANTE: Desactivamos el login por formulario por defecto de Spring
+                // Esto es lo que quita el aviso de la "generated password"
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests(auth -> auth
-                        // Configuro acceso público para productos, consola H2 y endpoints de auth
-                        .requestMatchers("/api/products/**", "/h2-console/**", "/api/auth/**").permitAll()
-                        // El resto de peticiones requieren obligatoriamente un token válido
+                        // 3. Abrimos los endpoints necesarios
+                        .requestMatchers("/api/auth/**", "/h2-console/**", "/api/products/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
-                // Habilito el renderizado de frames para poder usar la interfaz de la BD H2
+                // Para que funcione la consola H2
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 
-        // Construyo y devuelvo la cadena de filtros de seguridad
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }
