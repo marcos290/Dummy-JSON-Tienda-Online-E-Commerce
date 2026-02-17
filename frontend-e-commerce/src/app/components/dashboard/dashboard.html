@@ -1,0 +1,26 @@
+<div class="dashboard-container">
+  <header>
+    <h1>🛍️ Mi Tienda</h1>
+    <button class="btn-logout" (click)="onLogout()">Cerrar Sesión</button>
+  </header>
+
+  <div *ngIf="productos.length === 0" style="text-align: center; padding: 50px;">
+    <h3>Cargando catálogo...</h3>
+  </div>
+
+  <div class="productos-grid">
+    <div class="producto-card" *ngFor="let prod of productos">
+      <div class="image-box">
+        <img [src]="prod.thumbnail" [alt]="prod.title">
+      </div>
+      <div class="info">
+        <h3>{{ prod.title }}</h3>
+        <p class="price">{{ prod.price }} €</p>
+        <div class="btns">
+          <button class="edit" (click)="onEdit(prod)">✏️</button>
+          <button class="delete" (click)="onDelete(prod.id)">🗑️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
