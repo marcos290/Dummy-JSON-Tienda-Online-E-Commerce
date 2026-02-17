@@ -1,0 +1,76 @@
+/* Centramos el contenedor en la pantalla */
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo del título de la tienda */
+.login-container h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Separación entre los campos */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Estilo de las etiquetas (Email y Contraseña) */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Estilo de las cajas de texto */
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dce1e6;
+  border-radius: 6px;
+  box-sizing: border-box; /* Para que el 100% no se salga del contenedor */
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+/* Efecto al hacer clic en la caja de texto */
+.form-group input:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* El botónazo de entrar */
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+/* Efecto al pasar el ratón por el botón */
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Pequeño efecto al hacer clic en el botón */
+button:active {
+  transform: scale(0.98);
+}
