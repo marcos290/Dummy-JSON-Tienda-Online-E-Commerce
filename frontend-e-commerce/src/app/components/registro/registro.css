@@ -1,0 +1,52 @@
+.register-container {
+  max-width: 400px;
+  margin: 50px auto; /* Un poco menos de margen arriba que el login */
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-container h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dce1e6;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #2ecc71; /* Color verde para diferenciarlo del login */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #27ae60;
+}

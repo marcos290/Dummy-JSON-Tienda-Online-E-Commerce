@@ -6,23 +6,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-  // URL de tu API en Spring Boot
-  private apiUrl = 'http://localhost:8080/api/auth';
+  // Asegúrate de que el puerto sea el 8080 de tu Spring Boot
+  private URL = 'http://localhost:8080/api/auth'; 
 
   constructor(private http: HttpClient) { }
 
-  // Enviar el login al servidor
+  // Cambiamos /registro por /register para que coincida con tu Java
+  register(userData: any): Observable<any> {
+    return this.http.post(`${this.URL}/register`, userData);
+  }
+
   login(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    return this.http.post(`${this.URL}/login`, credentials);
   }
 
-  // Guardar el token JWT
-  saveToken(token: string): void {
+  saveToken(token: string) {
     localStorage.setItem('token_tienda', token);
-  }
-
-  // Obtener el token guardado
-  getToken() {
-    return localStorage.getItem('token_tienda');
   }
 }
