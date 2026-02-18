@@ -1,26 +1,50 @@
-<div class="dashboard-container">
-  <header>
-    <h1>🛍️ Mi Tienda</h1>
-    <button class="btn-logout" (click)="onLogout()">Cerrar Sesión</button>
-  </header>
+<mat-toolbar color="primary" class="navbar" style="display: flex; justify-content: space-between; position: sticky; top: 0; z-index: 1000;">
+  <span>🛍️ Mi Tienda Pro</span>
+  
+  <div>
+    <button mat-icon-button class="cart-btn" style="margin-right: 15px;">
+      <mat-icon [matBadge]="cartService.getCount()" matBadgeColor="warn">shopping_cart</mat-icon>
+    </button>
 
+    <button mat-button (click)="onLogout()">
+      <mat-icon>logout</mat-icon> Cerrar Sesión
+    </button>
+  </div>
+</mat-toolbar>
+
+<div class="dashboard-container" style="padding: 20px; background-color: #fafafa; min-height: 100vh;">
+  
   <div *ngIf="productos.length === 0" style="text-align: center; padding: 50px;">
-    <h3>Cargando catálogo...</h3>
+    <h3>Cargando catálogo desde DummyJSON... ⏳</h3>
   </div>
 
-  <div class="productos-grid">
-    <div class="producto-card" *ngFor="let prod of productos">
-      <div class="image-box">
-        <img [src]="prod.thumbnail" [alt]="prod.title">
-      </div>
-      <div class="info">
-        <h3>{{ prod.title }}</h3>
-        <p class="price">{{ prod.price }} €</p>
-        <div class="btns">
-          <button class="edit" (click)="onEdit(prod)">✏️</button>
-          <button class="delete" (click)="onDelete(prod.id)">🗑️</button>
+<div class="productos-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+    
+    <mat-card class="producto-card" *ngFor="let prod of productos" style="display: flex; flex-direction: column; justify-content: space-between;">
+      
+      <img mat-card-image [src]="prod.thumbnail || prod.images[0]" [alt]="prod.title" style="height: 200px; object-fit: contain; background: #f0f0f0;">
+      
+      <mat-card-content style="margin-top: 15px;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 5px;">{{ prod.title }}</h3>
+        
+        <p style="font-size: 1.5rem; font-weight: bold; color: #388e3c; margin: 0;">{{ prod.price }} €</p>
+      </mat-card-content>
+
+      <mat-card-actions style="display: flex; justify-content: space-between; padding: 16px;">
+        <button mat-flat-button color="accent" (click)="agregarAlCarrito(prod)">
+          <mat-icon>add_shopping_cart</mat-icon> Añadir
+        </button>
+        
+        <div>
+          <button mat-icon-button color="primary" (click)="onEdit(prod)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="onDelete(prod.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
-      </div>
-    </div>
+      </mat-card-actions>
+    </mat-card>
+
   </div>
 </div>

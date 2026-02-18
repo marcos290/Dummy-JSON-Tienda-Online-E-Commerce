@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private url = 'https://dummyjson.com/products';
+  // ¡LA CLAVE ESTÁ AQUÍ! Apuntamos a la API pública, no al backend bloqueado
+  private apiUrl = 'https://dummyjson.com/products';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getProducts(): Observable<any> {
-    return this.http.get<any>(this.url);
+    return this.http.get(this.apiUrl);
   }
 }
