@@ -2,7 +2,7 @@
 
 Proyecto final para el modulo de DWES. Se trata de una plataforma de comercio electrónico completa que implementa una arquitectura desacoplada (Frontend en Angular y Backend en Spring Boot) con  enfoque  en la robustez y la ciberseguridad.
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 ### Frontend (Angular)
 - **Framework:** Angular 17+ (Componentes no standalone vinculados mediante `AppModule`).
@@ -17,7 +17,7 @@ Proyecto final para el modulo de DWES. Se trata de una plataforma de comercio el
 
 ---
 
-## 🔐 Arquitectura de Ciberseguridad (Puntos Clave)
+##  Arquitectura de Ciberseguridad 
 
 El corazón de este proyecto es su sistema de protección contra intrusos y gestión de sesiones:
 
@@ -52,4 +52,5 @@ Para demostrar el funcionamiento del sistema de seguridad :
 
 ##  Autor
 - **Marcos García -Oliva Rubio** .
+
 
