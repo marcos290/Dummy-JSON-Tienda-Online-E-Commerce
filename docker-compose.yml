@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  backend-server:
+    build: ./backend-e-commerce
+    ports:
+      - "8080:8080"
+  
+  frontend-client:
+    build: ./frontend-e-commerce
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend-server
