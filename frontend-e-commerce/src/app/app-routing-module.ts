@@ -4,33 +4,44 @@ import { Login } from './components/login/login';
 import { Registro } from './components/registro/registro';
 import { Dashboard } from './components/dashboard/dashboard';
 
-// --- PASO 1: Importamos el Guard que acabamos de crear ---
-import { authGuard } from './core/guards/auth-guard'; // Asegúrate de que la ruta es correcta
+// --- PASO 1: IMPORTACIÓN DE SEGURIDAD ---
+// Importamos el Guard funcional para validar el acceso a rutas protegidas.
+import { authGuard } from './core/guards/auth-guard'; 
 
+/**
+ * CONFIGURACIÓN DE RUTAS (Routes)
+ * Define el mapeo entre las URLs del navegador y los componentes de Angular.
+ */
 const routes: Routes = [
-  // Si entras a localhost:4200, te manda al login
+  // 1. RUTA INICIAL: Redirección automática.
+  // Si el usuario entra en la raíz, lo enviamos directamente al Login.
   { path: '', redirectTo: 'login', pathMatch: 'full' }, 
   
-  // Ruta del login
+  // 2. RUTA DE LOGIN: Acceso al formulario de autenticación.
   { path: 'login', component: Login },
   
-  // Ruta del registro
+  // 3. RUTA DE REGISTRO: Acceso al formulario de creación de cuenta.
   { path: 'registro', component: Registro }, 
   
-  // --- PASO 2: Protegemos el Dashboard con el canActivate ---
+  // 4. RUTA PROTEGIDA (DASHBOARD):
+  // Check 10: Aplicamos 'canActivate'. 
+  // El 'authGuard' intercepta el intento de entrada y solo permite el paso si hay un token válido.
   { 
     path: 'dashboard', 
     component: Dashboard,
-    canActivate: [authGuard] // 🔒 Solo pasan los que tengan token
+    canActivate: [authGuard] // 🔒 Escudo de seguridad en el lado del cliente.
   },
 
-  // --- PASO 3: Ruta para el 404 (Check 11 de la lista) ---
-  // Si escriben cualquier tontería en la URL, los mandamos al login o a una página de error
+  // 5. MANEJO DE RUTAS NO ENCONTRADAS (Check 11):
+  // El comodín '**' captura cualquier URL que no coincida con las anteriores (Error 404).
+  // Redirigimos al Login para asegurar que el usuario siempre esté en un entorno controlado.
   { path: '**', redirectTo: 'login' } 
 ];
 
 @NgModule({
+  // 'forRoot' registra las rutas en el root de la aplicación.
   imports: [RouterModule.forRoot(routes)],
+  // Exportamos RouterModule para que sus directivas (como routerLink) estén disponibles en AppModule.
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
