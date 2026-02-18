@@ -10,31 +10,28 @@ import { Router } from '@angular/router';
 })
 export class Login { 
   
-  // 1. Las variables del formulario
   user = {
     email: '',
     password: ''
   };
 
-  // 2. El constructor con el Router ya inyectado
   constructor(private authService: Auth, private router: Router) { }
 
-  // 3. La función de Login completa con la redirección
   onLogin() {
     console.log('Enviando datos...', this.user);
     
     this.authService.login(this.user).subscribe({
       next: (res) => {
-        // Guardamos el token en el cajón
-        this.authService.saveToken(res.token);
+        // Ya no llamamos a saveToken aquí, 
+        // porque el servicio Auth ya lo hace con el 'tap'
         
-        // Avisamos de que todo ha ido bien
-        alert('¡Login OK!');
+        console.log('Respuesta del servidor:', res);
         
-        // ¡LA MAGIA! 🚀 Le damos la patada a Angular para que nos lleve a la tienda
+        // Redirigimos al dashboard
         this.router.navigate(['/dashboard']); 
       },
       error: (err) => {
+        console.error('Error en login:', err);
         alert('Fallo en el login. Comprueba tus credenciales.');
       }
     });

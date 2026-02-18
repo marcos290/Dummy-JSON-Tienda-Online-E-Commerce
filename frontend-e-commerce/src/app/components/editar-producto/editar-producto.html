@@ -1,0 +1,26 @@
+<h2 mat-dialog-title style="background: #3f51b5; color: white; margin: -24px -24px 0 -24px; padding: 20px;">
+  ✏️ Editar Producto
+</h2>
+
+<mat-dialog-content style="display: flex; flex-direction: column; gap: 20px; padding-top: 30px; min-width: 350px;">
+  
+  <div style="display: flex; flex-direction: column;">
+    <label style="font-weight: bold; margin-bottom: 8px; color: #555;">Título del producto:</label>
+    <input type="text" [(ngModel)]="productoEditado.title" 
+           style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none;">
+  </div>
+
+  <div style="display: flex; flex-direction: column;">
+    <label style="font-weight: bold; margin-bottom: 8px; color: #555;">Precio (€):</label>
+    <input type="number" [(ngModel)]="productoEditado.price" 
+           style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none;">
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" style="padding: 20px 0 0 0;">
+  <button mat-button color="warn" (click)="cancelar()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="guardarCambios()" style="border-radius: 20px;">
+    💾 Guardar Cambios
+  </button>
+</mat-dialog-actions>
