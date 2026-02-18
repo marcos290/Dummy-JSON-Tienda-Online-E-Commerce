@@ -1,9 +1,9 @@
-<h2 mat-dialog-title style="margin-bottom: 0;">🛒 Tu Carrito</h2>
+<h2 mat-dialog-title style="margin-bottom: 0;">Tu Carrito</h2>
 
 <mat-dialog-content style="padding-top: 15px; min-width: 300px;">
   
   <div *ngIf="productosCarrito.length === 0" style="text-align: center; padding: 20px; color: #666;">
-    <p>El carrito está vacío. ¡Añade algunas cosas chulas!</p>
+    <p>El carrito está vacío. ¡Añade productos!</p>
   </div>
 
   <div *ngFor="let item of productosCarrito" style="display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0;">
